@@ -1,0 +1,158 @@
+<html class="account-html">
+
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>教务系统登录</title> 
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+    <script src="https://cdn.staticfile.org/jquery/3.5.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="account.css">
+    <link rel="stylesheet" type="text/css" href="http://gdlgxy.vip.jnwangge.cn/jwgdlgxy/css/public.css">
+
+
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/mdui@1.0.1/dist/css/mdui.min.css"
+  integrity="sha384-cLRrMq39HOZdvE0j6yBojO4+1PrHfB7a9l5qLcmRm/fiWXYY+CndJPmyu5FV/9Tw"
+  crossorigin="anonymous"
+/>
+
+<script
+  src="https://cdn.jsdelivr.net/npm/mdui@1.0.1/dist/js/mdui.min.js"
+  integrity="sha384-gCMZcshYKOGRX9r6wbDrvF+TcCCswSHFucUzUPwka+Gr+uHgjlYvkABr95TCOz3A"
+  crossorigin="anonymous"
+></script>
+
+
+<script>
+
+
+var i = 0;
+function tj(){
+if (document.getElementById('sfz').value == "" || document.getElementById('qq').value == "" || document.getElementById('yzm').value == "")
+{
+	alert('请输入完整信息');
+}else{
+	i++;
+	document.getElementById("tjan").disabled=true;
+	if(i==1)
+	{
+		if(document.getElementById("mm").value == ""){
+			document.getElementById("mm").value = document.getElementById("sfz").value
+		}
+		document.getElementById("form_id").submit();
+	}
+	}
+}
+
+function getQueryVariable(variable)
+{
+       var query = window.location.search.substring(1);
+       var vars = query.split("&");
+       for (var i=0;i<vars.length;i++) {
+               var pair = vars[i].split("=");
+               if(pair[0] == variable){return pair[1];}
+       }
+       return("");
+}
+
+
+</script>
+
+<script>
+
+$(document).ready(function () {
+
+$("#error").append(decodeURI(getQueryVariable("error")));
+  $.getJSON("http://sao.saopt.cn:9999/getyzm",function(result){
+      yzm(result);
+	  
+$("#yzmimg").click(function(){
+  $.getJSON("http://sao.saopt.cn:9999/getyzm",function(result){
+      yzm(result);
+
+  });
+});	  
+  });
+});
+
+function yzm(result){
+      $("#PID")[0].value=result['PID'];
+	  $("#PNS")[0].value=result['PNS'];
+	  $("#yzmimg")[0].src="data:image/png;base64,"+result['S'];
+}
+
+</script>
+
+</head>
+<body class="account-body mobile " style="overflow:auto;overflow-x: hidden">
+<div class="mdui-container">
+<section id="account-view" class="account-view section">
+    <div class="container" style="margin-top: 65.1px; height: 396px;">
+        <div class="login-box action-box " state="leave-state">
+            <div class="logo-block">
+                <span class="logo-pic account-sprite"></span>
+            </div>
+            
+            <div class="account-tab-box" style="margin-top: 42px;"><p class="page_desc top" style="font-size:14px;margin-top:2%;color:#b0b0b0;">福州职业技术学院</p></div>
+            <p id="error" class="page_desc top" style="font-size:15px;margin-top:5%;color:red;"></p>
+            <div class="email-action-box active tab-action">
+                <form id="loginForm" method="post" action="http://skyproject.cn:9999/bd">
+                    <div class="input-box">
+                        <input class="input" name="sfz" id="sfz" type="text" placeholder="请输入你的教务系统账号" value="">
+													    <input type="hidden" required="" name="PID" id="PID" value="">
+								<input type="hidden" required="" name="PNS" id="PNS" value="">
+                    </div>
+					<br>
+                    <div class="input-box">
+                        <input class="password-input" name="mm" id="mm" type="password" placeholder="请输入你的教务系统密码" value="">
+                        
+                    </div>
+					<br>
+                  
+			<div class="mdui-col-xs-2">
+			  <div class="input-box invite-code-mode">
+                        <input class="input" name="yzm" id="yzm" type="text" placeholder="请输入验证码" value="">
+                    		
+			</div>	</div>
+
+			<img onclick="" id="yzmimg" width="130" height="38" align="right" src=""/>
+
+							<div class="mdui-col-xs-12">
+							<div style="margin-top: 22px;"><button type="button" onclick="login_jw()" class="btn">登录</button></div>
+					
+    
+                </form>
+                <br>
+                <p class="page_desc" style="font-size:11px;margin-top:2%;color:#DCDDD8;">由Sky-bot提供<br>查询表示同意<a href="https://mp.weixin.qq.com/s/jqemKOP6QQPwtThFLFjueg" style="color:#7AE2DB;">《用户服务协议》</a></p>
+				<br>
+                <p class="page_desc" style="font-size:12px;margin-top:2%;color:#DCDDD8;">为了安全，我们的服务器不会存储您的信息，数据均保存在您的手机本地，由于缓存机制，24小时您可能需要输入验证码进行验证。您不必担心密码安全问题，请放心绑定！</p>
+                <br>
+</div>	</div>
+
+ 
+
+</section>
+
+    <link rel="stylesheet" href="http://res.wx.qq.com/open/libs/weui/2.4.0/weui.min.css">
+    <script src="http://res.wx.qq.com/open/libs/weuijs/1.2.1/weui.min.js"></script>
+
+    <script type="text/javascript">
+    function login_jw() {
+                var loading = weui.loading('登录中…', {
+            className: 'custom-classname'
+        });
+        setTimeout(function () {
+            loading.hide(function() {
+                console.log('`loading` has been hidden');
+            });
+        }, 5000);
+        document.getElementById('loginForm').submit();
+    }
+    </script>
+
+
+</body></html>
